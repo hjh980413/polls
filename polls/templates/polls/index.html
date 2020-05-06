@@ -1,0 +1,40 @@
+<!--polls/templates/polls/index.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+    {% if latest_question_list %}
+        <ul>
+        {% for question in latest_question_list %}
+            <li>
+                {#<a href="/polls/{{ question.id }}/">#}
+                {#<a href="{% url 'detail' question.id %}">#}
+                <a href="{% url 'polls:detail' question.id %}">
+                    {{ question.question_text }}
+                </a>
+                </a>
+            </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>진행 중인 투표가 없어요.</p>
+    {% endif %}
+</body>
+</html>
+
+<!--템플릿을 획득하기 위하여 loader 임포트-->
+<!--loader.get_template() 함수로 템플릿 획득-->
+<!--뷰가 템플릿에게 전달할 자료를 context 사전으로 저장-->
+<!--template.render(context, request) 코드로 템플릿을 렌더링-->
+<!--렌더링 된 템플릿을 HttpResponse() 함수로 반환-->
+<!--href="/polls/{{ question.id }}/"-->
+<!--만일 앱 이름이 변경되면 템플릿도 수정해야 함-->
+<!--함수 호출 때, 인자를 괄호 속에 표기하는 언어였다면,-->
+<!--장고 템플릿 태그는 함수 호출 때 인자를 괄호 속에 표기하지 않고,-->
+<!--그냥 공백으로 구분하여 나열하는 방식이라는 점에 유의해야 함!-->
